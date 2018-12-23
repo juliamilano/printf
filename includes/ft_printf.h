@@ -26,6 +26,8 @@ typedef struct 	s_data
     char *prec;
     char *spec;
 	char type;
+	char *output;
+	char *result;
 	//va_list     list;
 	// char *data;
 	// char type;
@@ -45,6 +47,10 @@ int check_type(char c, t_data *f);
 int check_flags(char c);
 //void    def_type(va_list listPointer, char *s);
 //void    def_type(va_list listPointer, char *s, t_data *i);
-void    def_type(va_list listPointer, t_data *i);
 void	def_all(t_data *f);
+void    def_type(va_list list, t_data *i);
+int print_res(t_data *f);
+
+//обработка 
+int d_treat(t_data  *f);
 #endif

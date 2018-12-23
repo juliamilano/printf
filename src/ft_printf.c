@@ -20,6 +20,8 @@ void empty_struct(t_data *f)
     f->prec = NULL;
     f->spec = NULL;
 	f->type = 0;
+    f->output = NULL;
+    f->result = NULL;
 }
 
 int ft_printf(const char *format, ...)
@@ -44,9 +46,10 @@ int ft_printf(const char *format, ...)
             if (check_data(format + i + 1, &cnt_i, &f))
             {
                 f.data = ft_strsub(format, i + 1, cnt_i + 1);
-                printf("\n arr %s\n", f.data );
+                //printf("\n arr %s\n", f.data );
                 def_all(&f);
-			    //def_type(list, &f);
+			    def_type(list, &f);
+                print_res(&f);
                  i = i + cnt_i + 1;
                  cnt_i = 0;
                  free(f.data);

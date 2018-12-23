@@ -62,8 +62,8 @@ int check_size(char **size, char *s, int *i)
 		(*i) += 2;
 	}
 	else
-		return 0;
-	return 1;
+		return (0);
+	return (1);
 	
 }
 
@@ -76,27 +76,20 @@ void def_all(t_data *f)
     step = 0;
     while (++step <= 4)
     {
-        if (step == 1)
+        if (step == 1 && step++)
         {
             while (check_flags(f->data[i]))
                 i++;
             f->flag = ft_strsub(f->data, 0, i--);
-			step++;
         }
-        if (step == 2)
-    	{
-            //i++;
+        if (step == 2 && step++)
             if ((f->data[++i] >= 49 && f->data[i] <= 57) || f->data[i] == '*')
                 create_width(&f->width, f->data + i, &i);
-			step++;
-        }
-		if (step == 3)
-		{
+		if (step == 3 && step++)
 			if (f->data[i] == '.')
 				create_prec(&f->prec, f->data + i, &i);
-			step++;
-		}
-		if (step == 4)
-      	 	(check_size(&f->spec, f->data + i, &i)) ? step++ : step++;
+		if (step == 4 && step++)
+      	 	check_size(&f->spec, f->data + i, &i);
+		//printf("f->data %s - |f->flag %s| f->width %s - f->prec %s - f->spec %s - %c \n", f->data, f->flag, f->width, f->prec, f->spec, f->type);
 	}
 }

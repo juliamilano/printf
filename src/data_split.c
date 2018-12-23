@@ -40,15 +40,12 @@ static int     validinput(const char *s)
 
 void    def_type(va_list list, t_data *f)
 {
-    char *output;
-
-    output = NULL;
     if (validinput(f->data))
     {
         if (ft_strchr(f->data, 'd') && (f->type = 'd'))
-            output = ft_itoa(va_arg(list, int));
+            f->output = ft_itoa(va_arg(list, int));
         else if (ft_strchr(f->data, 'i') && (f->type = 'i'))
-            output = ft_itoa(va_arg(list, int));
+            f->output = ft_itoa(va_arg(list, int));
         // else if (ft_strchr(f->data, 'o') && (f->type = 'o'))
         //     output = ft_itoa(va_arg(listPointer, int));
         // else if (ft_strchr(f->data, 'u') && (f->type = 'u'))
@@ -65,7 +62,7 @@ void    def_type(va_list list, t_data *f)
         //    output = va_arg(listPointer, char *);
         // else if (ft_strchr(f->data, 'p') && (f->type = 'p'))
         //     output = va_arg(listPointer, void *);
-        ft_putstr(output);
+        //ft_putstr(f->output);
      }
      //def_var(f, output);
     // treatment // output
