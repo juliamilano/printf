@@ -16,7 +16,10 @@ int     main(void)
 {
   //printf("%d\n", 12);
   //  ft_printf("ryhy %-+0 12.-5.#5diyjyt %s \n", 15, "hello");
-    ft_printf("hjnf %+.5ld dyjhh \n", 12);
+      printf("\nprintf |%05d| dyjhh \n", 32);
+    printf("\nprintf |%05d| dyjhh \n", -12);
+      ft_printf("ft_printf |%05d| dyjhh \n", 32);
+    ft_printf("ft_printf |%05d| dyjhh \n", -12);
    //  ft_printf("ghd j%%j hnjj\n", 15, 5);
     return 0;
 }

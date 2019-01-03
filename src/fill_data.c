@@ -86,10 +86,10 @@ void def_all(t_data *f)
             if ((f->data[++i] >= 49 && f->data[i] <= 57) || f->data[i] == '*')
                 create_width(&f->width, f->data + i, &i);
 		if (step == 3 && step++)
-			if (f->data[i] == '.')
-				create_prec(&f->prec, f->data + i, &i);
-		if (step == 4 && step++)
+		  	if (f->data[i] == '.')
+	  			create_prec(&f->prec, f->data + i, &i);
+	    if (step == 4 && step++)
       	 	check_size(&f->spec, f->data + i, &i);
-		//printf("f->data %s - |f->flag %s| f->width %s - f->prec %s - f->spec %s - %c \n", f->data, f->flag, f->width, f->prec, f->spec, f->type);
+		printf("f->data %s - |f->flag %s| f->width %s - f->prec %s - f->spec %s - %c \n", f->data, f->flag, f->width, f->prec, f->spec, f->type);
 	}
 }
