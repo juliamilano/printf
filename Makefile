@@ -13,7 +13,7 @@ IFLAGS :=	-I $(INC_PATH) -I $(LIB_PATH)
 LFLAGS :=	-L $(LIB_PATH) -lft
 
 HFILES :=	ft_printf
-FILES :=	main ft_printf validation data_split fill_data 2
+FILES :=	main ft_printf validation data_split fill_data d_work
 LIB :=		$(LIB_PATH)libft.a
 
 HDRS :=		$(addprefix $(INC_PATH), $(addsuffix .h, $(HFILES)))
