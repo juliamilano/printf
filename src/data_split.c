@@ -46,7 +46,7 @@ void	cnt_mem(t_data *f)
 	f->result = (char *)malloc(sizeof(char) * memory + 1);
 	f->result[memory] = '\0';
     f->memory = memory;
-    printf("f->memory%d\n", f->memory);
+    //printf("f->memory%d\n", f->memory);
 }
 
 void    def_type(va_list list, t_data *f)

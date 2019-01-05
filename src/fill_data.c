@@ -43,6 +43,7 @@ void create_prec(char **prec, char *s, int *i)
   		cnt--;
   		*prec = ft_strsub(s, 1, cnt--);
   }
+
 }
 
 int check_size(char **size, char *s, int *i)
@@ -67,6 +68,22 @@ int check_size(char **size, char *s, int *i)
 	
 }
 
+void check_zero_prec(t_data *f)
+{
+  char *str;
+
+  if (f->prec && ft_strchr(f->flag, '0'))
+  {
+    str = ft_strchr(f->flag, '0');
+    str[0] = ' ';
+  }
+  else if (ft_strchr(f->flag, '0') && ft_strchr(f->flag, '-'))
+  {
+    str = ft_strchr(f->flag, '0');
+    str[0] = '-';
+  }
+}
+
 void def_all(t_data *f)
 {
     int step;
@@ -83,7 +100,7 @@ void def_all(t_data *f)
             f->flag = ft_strsub(f->data, 0, i--);
         }
         if (step == 2 && step++)
-            if ((f->data[++i] >= 49 && f->data[i] <= 57) || f->data[i] == '*')
+			if ((f->data[++i] >= 49 && f->data[i] <= 57) || f->data[i] == '*')
                 create_width(&f->width, f->data + i, &i);
 		    if (step == 3 && step++)
 		    	if (f->data[i] == '.')
@@ -93,5 +110,6 @@ void def_all(t_data *f)
     
 	    	printf("f->data %s - |f->flag %s| f->width %s - f->prec %s - f->spec %s - %c \n", f->data, f->flag, f->width, f->prec, f->spec, f->type);
 	  }
+    check_zero_prec(f);
       //cnt_mem(f);
 }

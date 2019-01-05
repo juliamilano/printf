@@ -39,6 +39,10 @@ typedef struct 	s_data
 	t_fill dfill;
 }				t_data;
 
+void obnull_dfill(t_data  *f);
+void empty_struct(t_data *f);
+
+
 int		ft_printf(const char *format, ...);
 int     check_data(const char *s, int *cnt_i, t_data *f);
 int check_type(char c, t_data *f);
@@ -47,7 +51,9 @@ int check_flags(char c);
 //void    def_type(va_list listPointer, char *s, t_data *i);
 void	def_all(t_data *f);
 void    def_type(va_list list, t_data *i);
-int print_res(t_data *f);
+int		print_res(t_data *f);
+
+
 
 //обработка 
 int d_treat(t_data  *f);

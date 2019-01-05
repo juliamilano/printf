@@ -12,6 +12,12 @@
 
 #include "ft_printf.h"
 
+void obnull_dfill(t_data  *f)
+{
+	f->dfill.znak = "\0";
+	f->dfill.space_width = NULL;
+	f->dfill.zero_prec = NULL;
+}
 void empty_struct(t_data *f)
 {
     f->data = NULL;
@@ -63,4 +69,13 @@ int ft_printf(const char *format, ...)
     }
     va_end(list);
     return (0);
+}
+
+int print_res(t_data *f)
+{
+    if (f->type == 'd' && !f->spec && d_treat(f))
+        ft_putstr(f->result);
+    // else if (f->type == 'c' && c_work(f))
+    //     ft_putstr(f->result);
+    return 1;
 }
