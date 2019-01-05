@@ -18,6 +18,13 @@
 // 	char type;
 // }				t_data;
 
+typedef struct 	d_fill
+{
+	char *zero_prec;
+	char *space_width;
+	char *znak;
+}				t_fill;
+
 typedef struct 	s_data
 {
 	char *data;
@@ -28,17 +35,8 @@ typedef struct 	s_data
 	char type;
 	char *output;
 	char *result;
-	//va_list     list;
-	// char *data;
-	// char type;
-	// char spec;
-	// char min;
-	// char plus;
-	// char spc;
-	// char hash;
-	// char zero;
-	// char precision;
-	// int width;
+	int memory;
+	t_fill dfill;
 }				t_data;
 
 int		ft_printf(const char *format, ...);

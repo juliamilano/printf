@@ -22,6 +22,7 @@ void empty_struct(t_data *f)
 	f->type = 0;
     f->output = NULL;
     f->result = NULL;
+    f->memory = 0;
 }
 
 int ft_printf(const char *format, ...)

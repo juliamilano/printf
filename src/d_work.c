@@ -19,7 +19,7 @@ char *d_width(t_data  *f, char c) // 33, 5, 0 00033
         len = ft_atoi(f->width);
     if (!(res = (char *)malloc(sizeof(char) * len + 1)))
         return NULL;
-    (f->output[0] == '-' && ft_strchr(f->flag, '0')) ? (res[i++] = f->result[j++]) && (min++) : 0;
+    ((f->result[0] == '-' || f->result[0] == '+') && ft_strchr(f->flag, '0')) ? (res[i++] = f->result[j++]) && (min++) : 0;
     while (len--)
     {
         while (i < (ft_atoi(f->width) - (int)ft_strlen(f->result)  + min))
@@ -83,7 +83,7 @@ char *d_r_width(t_data  *f, char c) // 33, 5, 0 00033
     if (!(res = (char *)malloc(sizeof(char) * len + 1)))
         return NULL;
     cnt_i = len - (int)ft_strlen(f->result);
-    while (len-- - cnt_i > 0)
+    while (len-- - cnt_i  > 0)
         res[i++] = f->result[j++];
     while (cnt_i-- > 0)
           res[i++] = c;
@@ -95,9 +95,7 @@ char *d_r_width(t_data  *f, char c) // 33, 5, 0 00033
 char *d_rev_width(t_data  *f)
 {
   char *res;
- // int s;
 
- //   (f->output[0] == '-') ? (s = 1) : (s = 0);
   res = d_r_width(f, ' ');
   //res = ft_srev_pos(res, s);
   return res;
@@ -106,12 +104,21 @@ char *d_rev_width(t_data  *f)
 char *d_minus_width(t_data  *f, char c)
 {
   char *res;
-  int s;
+ // int s;
 
-    (f->output[0] == '-') ? (s = 1) : (s = 0);
+  //  (f->result[0] == '-') ? (s = 1) : (s = 0);
   res = d_width(f, c);
   return res;
 }
+
+// int onelove(char *s, char *dec, char *width)
+// {
+//   char *arr;
+
+//   arr = d_width(s, ft_itoa(atoi(dec) + 1, 10), '0');
+//   arr = prec_width(arr, width, ' ');
+//   printf("prec =  |%s|\n", arr);
+// }
 
 char *d_plus(t_data  *f)
 {
@@ -138,7 +145,7 @@ static int fl = 1; //
     }
     return (f->result);
 }
-
+/*
 int d_treat(t_data  *f)
 {
     int i;
@@ -146,34 +153,39 @@ int d_treat(t_data  *f)
 
     i = 0;
     f->result = f->output;
+    // if (ft_strlen(f->prec))
+    //  {
+         
+    //     if (ft_strchr(f->flag, '+'))
+    //          f->result = d_plus(f);
+    //       f->result = d_width(f, '0');
+    //  }
     if (ft_strlen(f->flag)){
-        while (f->flag[i])
-        {
-            if (f->flag[i] == '+')
+        //while (f->flag[i])
+       // {
+            if (ft_strchr(f->flag, '+'))
             {
-                d_plus(f);
-
+                f->result = d_plus(f);
             } 
-            if (f->flag[i] == '0')
+            if (ft_strchr(f->flag, '0'))
             {
                 if (ft_atoi(f->output) < 0) 
                      f->result = d_minus_width(f, '0'); 
                  else
                     f->result = d_width(f, '0'); // leak
             }
-            if (f->flag[i] == '-')
+            if (ft_strchr(f->flag, '-'))
             {
                 f->result = d_rev_width(f);
             }
-            i++;
-        }
-    }
-    if (ft_strlen(f->width) && !ft_strlen(f->flag))
-    {
-        f->result = d_width(f, ' ');
+            //i++;
+        //}
+            if (ft_strlen(f->width) && (!ft_strlen(f->flag) || ft_strchr(f->flag, '+')))
+                f->result = d_width(f, ' ');
     }
 
-printf("f->output - %s f->result - %s \n", f->output, f->result);
+
+printf("f->output - |%s| f->result - |%s| \n", f->output, f->result);
     return 1;
 }
 
@@ -181,5 +193,8 @@ int print_res(t_data *f)
 {
     if (f->type == 'd' && d_treat(f))
         ft_putstr(f->result);
+    else if (f->type == 'c' && c_work(f))
+        ft_putstr(f->result);
     return 1;
 }
+*/

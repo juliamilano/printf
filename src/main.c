@@ -14,12 +14,37 @@
 
 int     main(void)
 {
-  //printf("%d\n", 12);
+  
   //  ft_printf("ryhy %-+0 12.-5.#5diyjyt %s \n", 15, "hello");
-      printf("\nprintf |%05d| dyjhh \n", 32);
-    printf("\nprintf |%05d| dyjhh \n", -12);
-      ft_printf("ft_printf |%05d| dyjhh \n", 32);
-    ft_printf("ft_printf |%05d| dyjhh \n", -12);
+      printf("\nprintf |%+.5d| printf \n", -32);
+    printf("\nprintf |%+.5d| printf \n", 32);
+      ft_printf("ft_printf |%+.5d| ft_printf \n", -32);
+    ft_printf("ft_printf |%+.5d| ft_printf \n", 32);
+
+    printf("\n\nprintf |%.5d| printf \n", -32);
+    printf("\nprintf |%.5d| printf \n", 32);
+      ft_printf("ft_printf |%.5d| ft_printf \n", -32);
+    ft_printf("ft_printf |%.5d| ft_printf \n", 32);
+
+          printf("\nprintf |%+8.5d| printf \n", -32);
+    printf("\nprintf |%+8.5d| printf \n", 32);
+      ft_printf("ft_printf |%+8.5d| ft_printf \n", -32);
+    ft_printf("ft_printf |%+8.5d| ft_printf \n", 32);
+
+    printf("\n\nprintf |%8.5d| printf \n", -32);
+    printf("\nprintf |%8.5d| printf \n", 32);
+      ft_printf("ft_printf |%8.5d| ft_printf \n", -32);
+    ft_printf("ft_printf |%8.5d| ft_printf \n", 32);
+
+    printf("\n\n5\nprintf |%d| printf \n", -32);
+    printf("\nprintf |%d| printf \n", 32);
+    ft_printf("ft_printf |%d| ft_printf \n", -32);
+    ft_printf("ft_printf |%d| ft_printf \n", 32);
+
+     printf("\n\n6\nprintf |%7d| printf \n", -32);
+    printf("\nprintf |%7d| printf \n", 32);
+    ft_printf("ft_printf |%7d| ft_printf \n", -32);
+    ft_printf("ft_printf |%7d| ft_printf \n", 32);
    //  ft_printf("ghd j%%j hnjj\n", 15, 5);
     return 0;
 }
