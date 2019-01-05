@@ -16,78 +16,87 @@ int     main(void)
 {
   
   //  ft_printf("ryhy %-+0 12.-5.#5diyjyt %s \n", 15, "hello");
-      printf("\nprintf |%+.5d| printf \n", -32);
-    printf("\nprintf |%+.5d| printf \n", 32);
-      ft_printf("ft_printf |%+.5d| ft_printf \n", -32);
-    ft_printf("ft_printf |%+.5d| ft_printf \n", 32);
+//       printf("\nprintf |%+.5d| printf \n", -32);
+//     printf("\nprintf |%+.5d| printf \n", 32);
+//       ft_printf("ft_printf |%+.5d| ft_printf \n", -32);
+//     ft_printf("ft_printf |%+.5d| ft_printf \n", 32);
 
-    printf("\n\nprintf |%.5d| printf \n", -32);
-    printf("\nprintf |%.5d| printf \n", 32);
-      ft_printf("ft_printf |%.5d| ft_printf \n", -32);
-    ft_printf("ft_printf |%.5d| ft_printf \n", 32);
+//     printf("\n\nprintf |%.5d| printf \n", -32);
+//     printf("\nprintf |%.5d| printf \n", 32);
+//       ft_printf("ft_printf |%.5d| ft_printf \n", -32);
+//     ft_printf("ft_printf |%.5d| ft_printf \n", 32);
 
-          printf("\nprintf |%+8.5d| printf \n", -32);
-    printf("\nprintf |%+8.5d| printf \n", 32);
-      ft_printf("ft_printf |%+8.5d| ft_printf \n", -32);
-    ft_printf("ft_printf |%+8.5d| ft_printf \n", 32);
+//           printf("\nprintf |%+8.5d| printf \n", -32);
+//     printf("\nprintf |%+8.5d| printf \n", 32);
+//       ft_printf("ft_printf |%+8.5d| ft_printf \n", -32);
+//     ft_printf("ft_printf |%+8.5d| ft_printf \n", 32);
 
-    printf("\n\nprintf |%8.5d| printf \n", -32);
-    printf("\nprintf |%8.5d| printf \n", 32);
-      ft_printf("ft_printf |%8.5d| ft_printf \n", -32);
-    ft_printf("ft_printf |%8.5d| ft_printf \n", 32);
+//     printf("\n\nprintf |%8.5d| printf \n", -32);
+//     printf("\nprintf |%8.5d| printf \n", 32);
+//       ft_printf("ft_printf |%8.5d| ft_printf \n", -32);
+//     ft_printf("ft_printf |%8.5d| ft_printf \n", 32);
 
-    printf("\n\n5\nprintf |%d| printf \n", -32);
-    printf("\nprintf |%d| printf \n", 32);
-    ft_printf("ft_printf |%d| ft_printf \n", -32);
-    ft_printf("ft_printf |%d| ft_printf \n", 32);
+//     printf("\n\n5\nprintf |%d| printf \n", -32);
+//     printf("\nprintf |%d| printf \n", 32);
+//     ft_printf("ft_printf |%d| ft_printf \n", -32);
+//     ft_printf("ft_printf |%d| ft_printf \n", 32);
 
-     printf("\n\n6\nprintf |%7d| printf \n", -32);
-    printf("\nprintf |%7d| printf \n", 32);
-    ft_printf("ft_printf |%7d| ft_printf \n", -32);
-    ft_printf("ft_printf |%7d| ft_printf \n", 32);
+//      printf("\n\n6\nprintf |%7d| printf \n", -32);
+//     printf("\nprintf |%7d| printf \n", 32);
+//     ft_printf("ft_printf |%7d| ft_printf \n", -32);
+//     ft_printf("ft_printf |%7d| ft_printf \n", 32);
 
-       printf("\n\n7\nprintf |%07d| printf \n", -32);
-    printf("\nprintf |%07d| printf \n", 32);
-    ft_printf("ft_printf |%07d| ft_printf \n", -32);
-    ft_printf("ft_printf |%07d| ft_printf \n", 32);
+//        printf("\n\n7\nprintf |%07d| printf \n", -32);
+//     printf("\nprintf |%07d| printf \n", 32);
+//     ft_printf("ft_printf |%07d| ft_printf \n", -32);
+//     ft_printf("ft_printf |%07d| ft_printf \n", 32);
 
-       printf("\n\n8\nprintf |%+07d| printf \n", -32);
-    printf("\nprintf |%+07d| printf \n", 32);
-    ft_printf("ft_printf |%+07d| ft_printf \n", -32);
-    ft_printf("ft_printf |%+07d| ft_printf \n", 32);
+//        printf("\n\n8\nprintf |%+07d| printf \n", -32);
+//     printf("\nprintf |%+07d| printf \n", 32);
+//     ft_printf("ft_printf |%+07d| ft_printf \n", -32);
+//     ft_printf("ft_printf |%+07d| ft_printf \n", 32);
 
-    printf("\n\n9\ncreate_s |%08.6d| \n", -5);
-    printf("create_s |%08.6d| \n", 5);
-    ft_printf("ft_printf |%08.6d|ft_printf \n", -5);
-    ft_printf("ft_printf |%08.6d|ft_printf \n", 5);
+//     printf("\n\n9\ncreate_s |%08.6d| \n", -5);
+//     printf("create_s |%08.6d| \n", 5);
+//     ft_printf("ft_printf |%08.6d|ft_printf \n", -5);
+//     ft_printf("ft_printf |%08.6d|ft_printf \n", 5);
 
-        printf("\n\n10\ncreate_s |% 8d| \n", -5);
-    printf("create_s |% 8d| \n", 5);
-    ft_printf("ft_printf |% 8d|ft_printf \n", -5);
-    ft_printf("ft_printf |% 8d|ft_printf \n", 5);
+//         printf("\n\n10\ncreate_s |% 8d| \n", -5);
+//     printf("create_s |% 8d| \n", 5);
+//     ft_printf("ft_printf |% 8d|ft_printf \n", -5);
+//     ft_printf("ft_printf |% 8d|ft_printf \n", 5);
 
-        printf("\n\n11\ncreate_s |%-.5d| \n", -5);
-    printf("create_s |%-.5d| \n", 5);
-    ft_printf("\n\nft_printf |%-.5d|ft_printf \n", -5);
-    ft_printf("ft_printf |%-.5d|ft_printf \n", 5);
+//         printf("\n\n11\ncreate_s |%-.5d| \n", -5);
+//     printf("create_s |%-.5d| \n", 5);
+//     ft_printf("\n\nft_printf |%-.5d|ft_printf \n", -5);
+//     ft_printf("ft_printf |%-.5d|ft_printf \n", 5);
 
-            printf("\n\n12\ncreate_s |%-5d| \n", -5);
-    printf("create_s |%-5d| \n", 5);
-    ft_printf("\n\nft_printf |%-05d|ft_printf \n", -5);
-    ft_printf("ft_printf |%-05d|ft_printf \n", 5);
+//             printf("\n\n12\ncreate_s |%-5d| \n", -5);
+//     printf("create_s |%-5d| \n", 5);
+//     ft_printf("\n\nft_printf |%-05d|ft_printf \n", -5);
+//     ft_printf("ft_printf |%-05d|ft_printf \n", 5);
 
-                printf("\n\n13\ncreate_s |%- 5d| \n", -5);
-    printf("create_s |%- 5d| \n", 5);
-    ft_printf("\n\nft_printf |%- 5d|ft_printf \n", -5);
-    ft_printf("ft_printf |%- 5d|ft_printf \n", 5);
+//                 printf("\n\n13\ncreate_s |%- 5d| \n", -5);
+//     printf("create_s |%- 5d| \n", 5);
+//     ft_printf("\n\nft_printf |%- 5d|ft_printf \n", -5);
+//     ft_printf("ft_printf |%- 5d|ft_printf \n", 5);
 
-printf("\n\n13\ncreate_s |%- 8.5d| \n", -5);
-printf("create_s |%- 8.5d| \n", 5);
-ft_printf("\ncreate_s |%- 8.5d| \n", -5);
-ft_printf("\ncreate_s |%- 8.5d| \n", 5);
-     
+// printf("\n\n13\ncreate_s |%- 8.5d| \n", -5);
+// printf("create_s |%- 8.5d| \n", 5);
+// ft_printf("\ncreate_s |%- 8.5d| \n", -5);
+// ft_printf("\ncreate_s |%- 8.5d| \n", 5);
+    long int a = 6;
+    long long int b = -8;
 
-   //  ft_printf("ghd j%%j hnjj\n", 15, 5);
+  printf("\n\n13\ncreate_s |%ld| \n", a);
+  printf("create_s |%ld| \n", a);
+  ft_printf("\ncreate_s |%ld| \n", a);
+  ft_printf("\ncreate_s |%ld| \n", a);
+
+  printf("\n\n13\ncreate_s |%lld| \n", b);
+  printf("create_s |%lld| \n", b);
+  ft_printf("\ncreate_s |%lld| \n", b);
+  ft_printf("\ncreate_s |%lld| \n", b);
     return 0;
 }
 /*

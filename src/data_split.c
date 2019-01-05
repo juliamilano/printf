@@ -53,10 +53,14 @@ void    def_type(va_list list, t_data *f)
 {
     if (validinput(f->data))
     {
-        if (ft_strchr(f->data, 'd') && (f->type = 'd'))
-		f->output = ft_itoa(va_arg(list, int));
+        if (ft_strchr(f->data, 'd') && (f->type = 'd') && (ft_strchr(f->spec, 'l')))
+            f->output = ft_itoa_li(va_arg(list, long int), 10);
+        else if (ft_strchr(f->data, 'd') && (f->type = 'd') && (ft_strnequ(f->spec, "ll", 2)))
+		    f->output = ft_itoa_lli(va_arg(list, long long int), 10);
+        else if (ft_strchr(f->data, 'd') && (f->type = 'd'))
+		    f->output = ft_itoa(va_arg(list, int));
         else if (ft_strchr(f->data, 'i') && (f->type = 'i'))
-		f->output = ft_itoa(va_arg(list, int));
+		    f->output = ft_itoa(va_arg(list, int));
         // else if (ft_strchr(f->data, 'o') && (f->type = 'o'))
         //     output = ft_itoa(va_arg(listPointer, int));
         // else if (ft_strchr(f->data, 'u') && (f->type = 'u'))

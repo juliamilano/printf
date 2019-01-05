@@ -157,13 +157,7 @@ int d_treat(t_data  *f)
 	else if (ft_strchr(f->flag, '-') && ft_strchr(f->flag, ' ') && f->dfill.znak[0] == '\0')
 		rev_j_data_space(f);
 	else if (ft_strchr(f->flag, '-'))
-	{
 		rev_join_data_v2(f);
-	}
-	// else if (ft_strchr(f->flag, '-'))
-	// {
-	// 	//rev_join_data_v2(f);
-	// }
 
 	printf("// f->result |%s|\n", f->result);
 	 //printf("f->dfill.znak |%s| \n f->dfill.zero_prec  |%s|\n f->dfill.space_width |%s|\n", f->dfill.znak , f->dfill.zero_prec , f->dfill.space_width);

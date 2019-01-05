@@ -17,6 +17,10 @@
 // 	char flag;
 // 	char type;
 // }				t_data;
+char	*ft_itoa_li(long int value, int base);
+char	*ft_itoa_lli(long long int value, int base);
+char	*ft_itoa_uli(unsigned long int value, int base);
+char	*ft_itoa_ulli(unsigned long long int value, int base);
 
 typedef struct 	d_fill
 {

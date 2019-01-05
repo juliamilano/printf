@@ -73,7 +73,7 @@ int ft_printf(const char *format, ...)
 
 int print_res(t_data *f)
 {
-    if (f->type == 'd' && !f->spec && d_treat(f))
+    if (f->type == 'd' && d_treat(f))
         ft_putstr(f->result);
     // else if (f->type == 'c' && c_work(f))
     //     ft_putstr(f->result);
