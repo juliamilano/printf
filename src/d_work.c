@@ -1,200 +1,157 @@
-
 #include "ft_printf.h"
 
-char *d_width(t_data  *f, char c) // 33, 5, 0 00033
+char *creat_s_width(t_data  *f, char symb)
 {
-    char *res;
-    int len;
-    int i;
-    int j;
-    int min;
 
-    min = 0;
-    j = 0;
-    i = 0;
-   // len = 0;
-   // if ((len = 0) && ((int)ft_strlen(f->result) > ft_atoi(f->width)))
-        len = (int)ft_strlen(f->result);
-    if ((int)ft_strlen(f->result) <= ft_atoi(f->width))
-        len = ft_atoi(f->width);
-    if (!(res = (char *)malloc(sizeof(char) * len + 1)))
-        return NULL;
-    ((f->result[0] == '-' || f->result[0] == '+') && ft_strchr(f->flag, '0')) ? (res[i++] = f->result[j++]) && (min++) : 0;
-    while (len--)
-    {
-        while (i < (ft_atoi(f->width) - (int)ft_strlen(f->result)  + min))
-            res[i++] = c;
-        res[i++] = f->result[j++];
-    }
-   res[i] = '\0';
-   return (res);
-   //printf("len = %d f->width - %s -- %d\n", len, f->result, ft_atoi(f->width));
+	int len;
+	char *s;
+	int i;
 
-}
-
-// char *s_prec(char *s, char *size)
-// {
-//     char *res;
-//     int siz;
-
-//     siz = ft_atoi(size);
-//     res = (char *)malloc(sizeof(char) * siz + 1);
-//     if (s && (int)ft_strlen(s) > siz)
-//     {
-//         res = ft_strncpy(res, s, siz);
-//         res[siz] = '\0';
-//     }
-//     //printf("%s\n", res);
-//     return (res);
-// }
-char	*ft_srev_pos(char *str, int position)
-{
-	int		len;
-	int		j;
-	int		i;
-	char	temp;
-  
-  i = (position || 0);
-	len = ft_strlen(str);
-	j = len - 1;
-	while (i < j)
+	i = -1;
+	s = NULL;
+	len = (int)ft_strlen(f->output);
+	if (ft_strchr(f->output, '+') || ft_strchr(f->output, '-'))
+ 	 	len--;
+	(f->dfill.zero_prec) ? len += (int)ft_strlen(f->dfill.zero_prec) : 0;
+	(f->dfill.znak) ? len += (int)ft_strlen(f->dfill.znak) : 0;
+	if (f->width && len < ft_atoi(f->width))
 	{
-		temp = str[i];
-		str[i++] = str[j];
-		str[j--] = temp;
+		s = (char *)malloc(sizeof(char) * ft_atoi(f->width) - len + 1);
+		while (++i < ft_atoi(f->width) - len)
+			s[i] = symb;
+		s[i] = '\0';
 	}
-	return (str);
+	return (s);
 }
 
-char *d_r_width(t_data  *f, char c) // 33, 5, 0 00033
+char *creat_s_prec(t_data  *f, char symb)
 {
-    char *res;
-    int len;
-    int i;
-    int j;
-    int cnt_i; 
+ 	char *s;
+ 	int len;
+	int output;
+	int i;
 
-    j = 0;
-    i = 0;
-    if ((len = 0) && ((int)ft_strlen(f->result) > ft_atoi(f->width)))
-        len = (int)ft_strlen(f->result);
-    if ((int)ft_strlen(f->result) <= ft_atoi(f->width))
-        len = ft_atoi(f->width);
-    if (!(res = (char *)malloc(sizeof(char) * len + 1)))
-        return NULL;
-    cnt_i = len - (int)ft_strlen(f->result);
-    while (len-- - cnt_i  > 0)
-        res[i++] = f->result[j++];
-    while (cnt_i-- > 0)
-          res[i++] = c;
-   res[i] = '\0';
-   return (res);
+	i = -1;
+ 	len = (int)ft_strlen(f->output);
+	if(ft_strchr(f->output, '+') || ft_strchr(f->output, '-'))
+	 	len--;
+	output = len;
+	s = NULL;
+	if (f->prec && len < ft_atoi(f->prec) && (s = (char *)malloc(sizeof(char) * ft_atoi(f->prec) - output + 1)))
+	{
+		len = ft_atoi(f->prec);
+		while (++i < len - output)
+			s[i] = symb;
+		s[i] = '\0';
+	}	
+ 	return (s);
 }
 
-
-char *d_rev_width(t_data  *f)
+void join_data_v1(t_data  *f)
 {
-  char *res;
+	int i;
+	int j;
 
-  res = d_r_width(f, ' ');
-  //res = ft_srev_pos(res, s);
-  return res;
+	i = 0;
+	j = 0;
+	if (f->dfill.space_width != NULL)
+		while (f->dfill.space_width[j] != '\0')
+			f->result[i++] = f->dfill.space_width[j++];
+	if (f->dfill.znak[0] != '\0')
+		f->result[i++] = f->dfill.znak[0];
+	j = 0;
+	if (f->dfill.zero_prec != NULL)
+		while (f->dfill.zero_prec[j] != '\0')
+			f->result[i++] = f->dfill.zero_prec[j++];
+	j = (ft_strchr(f->output, '+') || ft_strchr(f->output, '-')) ? 1 : 0;
+	if (i < f->memory)
+		while (i < f->memory)
+			f->result[i++] = f->output[j++];
+	//printf("f->result |%s|\n", f->result);
 }
-
-char *d_minus_width(t_data  *f, char c)
+void join_data_v2(t_data  *f)
 {
-  char *res;
- // int s;
+	int i;
+	int j;
 
-  //  (f->result[0] == '-') ? (s = 1) : (s = 0);
-  res = d_width(f, c);
-  return res;
+	i = 0;
+	if (f->dfill.znak[0] != '\0')
+		f->result[i++] = f->dfill.znak[0];
+	j = 0;
+	if (f->dfill.space_width != NULL)
+		while (f->dfill.space_width[j] != '\0')
+			f->result[i++] = f->dfill.space_width[j++];
+	j = 0;
+	if (f->dfill.zero_prec != NULL)
+		while (f->dfill.zero_prec[j] != '\0')
+			f->result[i++] = f->dfill.zero_prec[j++];
+	j = (ft_strchr(f->output, '+') || ft_strchr(f->output, '-')) ? 1 : 0;
+	if (i < f->memory)
+		while (i < f->memory)
+			f->result[i++] = f->output[j++];
+	//printf("f->result |%s|\n", f->result);
 }
-
-// int onelove(char *s, char *dec, char *width)
-// {
-//   char *arr;
-
-//   arr = d_width(s, ft_itoa(atoi(dec) + 1, 10), '0');
-//   arr = prec_width(arr, width, ' ');
-//   printf("prec =  |%s|\n", arr);
-// }
-
-char *d_plus(t_data  *f)
+void rev_join_data_v2(t_data  *f)
 {
-static int fl = 1; //
-    int len;
-    int i;
-    int j;
+	int i;
+	int j;
 
-
-    i = 0;
-    j = 0;
-    len = (int)ft_strlen(f->output);
-    if (fl)
-    {
-        if (!(f->result = (char *)malloc(sizeof(char) * len + 2)))
-            return NULL;
-        (atoi(f->output) > 0 && f->output[0] == '+') ? j++ : 0;
-        (atoi(f->output) > 0 && fl--) ? f->result[i++] = '+' : 0;
-        while (len--)
-            f->result[i++] = f->output[j++];
-        f->result[i] = '\0';
-        //   free(f->output);
-        //   f->output = NULL;
-    }
-    return (f->result);
+	i = 0;
+	if (f->dfill.znak[0] != '\0')
+		f->result[i++] = f->dfill.znak[0];
+	j = 0;
+	if (f->dfill.zero_prec != NULL)
+		while (f->dfill.zero_prec[j] != '\0')
+			f->result[i++] = f->dfill.zero_prec[j++];
+	j = (ft_strchr(f->output, '+') || ft_strchr(f->output, '-')) ? 1 : 0;
+	if (i < f->memory)
+		while (f->output[j])
+			f->result[i++] = f->output[j++];
+	j = 0;
+	if (f->dfill.space_width != NULL)
+		while (f->dfill.space_width[j] != '\0')
+			f->result[i++] = f->dfill.space_width[j++];
+	//printf("f->result |%s|\n", f->result);
 }
-/*
+
+void rev_j_data_space(t_data  *f)
+{
+	int i;
+	int j;
+
+	i = 0;
+	f->result[i++] = ' ';
+	j = 0;
+	if (f->dfill.zero_prec != NULL)
+		while (f->dfill.zero_prec[j] != '\0')
+			f->result[i++] = f->dfill.zero_prec[j++];		
+	j = 0;
+	if (i < f->memory)
+		while (f->output[j])
+			f->result[i++] = f->output[j++];
+	j = 0;
+	if (f->dfill.space_width != NULL)
+		while (f->dfill.space_width[j + 1] != '\0')
+			f->result[i++] = f->dfill.space_width[j++];
+	//printf(" rev_j_data_space f->result |%s|\n", f->dfill.space_width);
+}
+
 int d_treat(t_data  *f)
 {
-    int i;
-    //char *leak;
+	obnull_dfill(f);
+	fill__dfill(f);
+	if (!(ft_strchr(f->flag, '-')) && (ft_strchr(f->flag, '0') &&
+		(ft_strchr(f->output, '-') || ft_strchr(f->flag, '+'))))
+			join_data_v2(f);
+	else if (!(ft_strchr(f->flag, '-')))
+		join_data_v1(f);
+	else if (ft_strchr(f->flag, '-') && ft_strchr(f->flag, ' ') && f->dfill.znak[0] == '\0')
+		rev_j_data_space(f);
+	else if (ft_strchr(f->flag, '-'))
+		rev_join_data_v2(f);
 
-    i = 0;
-    f->result = f->output;
-    // if (ft_strlen(f->prec))
-    //  {
-         
-    //     if (ft_strchr(f->flag, '+'))
-    //          f->result = d_plus(f);
-    //       f->result = d_width(f, '0');
-    //  }
-    if (ft_strlen(f->flag)){
-        //while (f->flag[i])
-       // {
-            if (ft_strchr(f->flag, '+'))
-            {
-                f->result = d_plus(f);
-            } 
-            if (ft_strchr(f->flag, '0'))
-            {
-                if (ft_atoi(f->output) < 0) 
-                     f->result = d_minus_width(f, '0'); 
-                 else
-                    f->result = d_width(f, '0'); // leak
-            }
-            if (ft_strchr(f->flag, '-'))
-            {
-                f->result = d_rev_width(f);
-            }
-            //i++;
-        //}
-            if (ft_strlen(f->width) && (!ft_strlen(f->flag) || ft_strchr(f->flag, '+')))
-                f->result = d_width(f, ' ');
-    }
-
-
-printf("f->output - |%s| f->result - |%s| \n", f->output, f->result);
+	//printf("// f->result |%s|\n", f->result);
+	 //printf("f->dfill.znak |%s| \n f->dfill.zero_prec  |%s|\n f->dfill.space_width |%s|\n", f->dfill.znak , f->dfill.zero_prec , f->dfill.space_width);
     return 1;
 }
 
-int print_res(t_data *f)
-{
-    if (f->type == 'd' && d_treat(f))
-        ft_putstr(f->result);
-    else if (f->type == 'c' && c_work(f))
-        ft_putstr(f->result);
-    return 1;
-}
-*/

@@ -12,70 +12,73 @@
 
 #include "ft_printf.h"
 
-void obnull_dfill(t_data  *f)
+int            ft_write(t_data *f)
 {
-	f->dfill.znak = "\0";
-	f->dfill.space_width = NULL;
-	f->dfill.zero_prec = NULL;
-}
-void empty_struct(t_data *f)
-{
-    f->data = NULL;
-    f->flag = NULL;
-    f->width = NULL;
-    f->prec = NULL;
-    f->spec = NULL;
-	f->type = 0;
-    f->output = NULL;
-    f->result = NULL;
-    f->memory = 0;
-}
+    size_t len;
 
+    len = ft_strlen(f->result);
+    f->i_p += len;
+    write(1, f->result, len);
+    return (len);
+}
+int            ft_write_format(t_data *f, const char c)
+{
+    f->i_p++;
+    write(1, &c, 1);
+    return (1);
+}
 int ft_printf(const char *format, ...)
 {
 	t_data      f;
     int         i;
     int         cnt_i;
-    va_list     list;
 
     if (!format)
         return (0);
-    va_start(list, format);
+    va_start(f.list, format);
     i = -1;
     cnt_i = 0;
     empty_struct(&f);
     while (format[++i] != '\0') 
     {
-        if (format[i] == '%' && format[i + 1] == '%')
-			write(1, &format[i++],1);
+        //printf();
+        if (format[i] == '%' && format[i + 1] == '%' && f.i_p++)
+			ft_write_format(&f, format[i++]);
         else if (format[i] == '%')
         {
             if (check_data(format + i + 1, &cnt_i, &f))
             {
                 f.data = ft_strsub(format, i + 1, cnt_i + 1);
-                //printf("\n arr %s\n", f.data );
+                //printf("\n arr |%s|\n", f.data );
                 def_all(&f);
-			    def_type(list, &f);
+			    def_type(&f);
                 print_res(&f);
-                 i = i + cnt_i + 1;
-                 cnt_i = 0;
-                 free(f.data);
+                i = i + cnt_i + 1;
+                cnt_i = 0;
+                free_all_mem(&f);
             }
-            else 
-                write(1, &format[i],1);
+            else
+                ft_write_format(&f, format[i]);
         }
         else 
-            write(1, &format[i],1);
+            ft_write_format(&f, format[i]);
     }
-    va_end(list);
-    return (0);
+    va_end(f.list);
+    return (f.i_p);
 }
 
+// void ft_write_buff(t_data *f, char c)
+// {
+//     (c != 0) ? f->buff[f->i_p++] = c : 0;
+// }
 int print_res(t_data *f)
 {
     if (f->type == 'd' && d_treat(f))
-        ft_putstr(f->result);
-    // else if (f->type == 'c' && c_work(f))
-    //     ft_putstr(f->result);
+        ft_write(f);
+    else if (f->type == 'c' && s_treat(f))
+        ft_write(f);
+    else if (f->type == 's' && s_treat(f))
+        ft_write(f);
+
     return 1;
 }

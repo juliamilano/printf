@@ -12,55 +12,42 @@
 
 #include "ft_printf.h"
 
-static int     validinput(const char *s)
+char	*create_char(int n)
 {
-    int i;
+	char	*x;
+    char    symb;
 
-    i = 0;
-    while (s[i])
-    {
-        if (ft_isalpha(s[i]) || ft_isdigit(s[i]) ||
-		s[i] == '#' || s[i] == '.' ||
-		s[i] == '+' || s[i] == '-' || s[i] == ' ')
-			i++;
-        else
-		return (0);
-    }
-    return (1);
+	if (!(x = (char *)malloc(sizeof(char) * 2)))
+		return (NULL);
+	symb = (char)n;
+	x[0] = symb;
+	x[1] = '\0';
+	return (x);
 }
 
-void	cnt_mem(t_data *f)
-{
 
-	int memory;
 
-	memory = (int)ft_strlen(f->output);
-    if (ft_strchr(f->output, '+') || ft_strchr(f->output, '-'))
- 	 	memory--;
-	if (f->prec && memory < ft_atoi(f->prec))
-		memory = ft_atoi(f->prec);
-	if ((ft_strchr(f->flag, '+') || ft_strchr(f->output, '-')) && ++memory) 
-        ;
-	if (f->width != NULL && memory < ft_atoi(f->width))
-		memory = ft_atoi(f->width);
-	f->result = (char *)malloc(sizeof(char) * memory + 1);
-	f->result[memory] = '\0';
-    f->memory = memory;
-    //printf("f->memory%d\n", f->memory);
-}
-
-void    def_type(va_list list, t_data *f)
+void    def_type(t_data *f)
 {
     if (validinput(f->data))
     {
-        if (ft_strchr(f->data, 'd') && (f->type = 'd') && (ft_strchr(f->spec, 'l')))
-            f->output = ft_itoa_li(va_arg(list, long int), 10);
-        else if (ft_strchr(f->data, 'd') && (f->type = 'd') && (ft_strnequ(f->spec, "ll", 2)))
-		    f->output = ft_itoa_lli(va_arg(list, long long int), 10);
+        
+        if (ft_strchr(f->data, 'd') && (f->type = 'd') && f->spec && (ft_strnequ(f->spec, "ll", 2)))
+		    f->output = ft_litoa(va_arg(f->list, long long int));
+        else if (ft_strchr(f->data, 'd') && (f->type = 'd') && f->spec && (ft_strchr(f->spec, 'l')))
+            f->output = ft_litoa(va_arg(f->list, long int));
+        else if (ft_strchr(f->data, 'd') && (f->type = 'd') && f->spec && (ft_strnequ(f->spec, "hh", 2)))
+		    f->output = ft_litoa((signed char)va_arg(f->list, int));
+        else if (ft_strchr(f->data, 'd') && (f->type = 'd') && f->spec && (ft_strnequ(f->spec, "h", 1)))
+            f->output = ft_litoa((short int)va_arg(f->list, int));
         else if (ft_strchr(f->data, 'd') && (f->type = 'd'))
-		    f->output = ft_itoa(va_arg(list, int));
-        else if (ft_strchr(f->data, 'i') && (f->type = 'i'))
-		    f->output = ft_itoa(va_arg(list, int));
+		    f->output = ft_litoa(va_arg(f->list, int));
+        else if (ft_strchr(f->data, 'c') && (f->type = 'c')) // without spec
+            f->output = create_char(va_arg(f->list, int));
+        else if (ft_strchr(f->data, 's') && (f->type = 's')) // without spec
+            f->output = va_arg(f->list, char *);
+        //else if (ft_strchr(f->data, 'i') && (f->type = 'i'))
+		//    f->output = ft_itoa(va_arg(list, int));
         // else if (ft_strchr(f->data, 'o') && (f->type = 'o'))
         //     output = ft_itoa(va_arg(listPointer, int));
         // else if (ft_strchr(f->data, 'u') && (f->type = 'u'))
@@ -70,16 +57,14 @@ void    def_type(va_list list, t_data *f)
         // else if (ft_strchr(f->data, 'x') && (f->type = 'x'))
         //     output = ft_itoa(va_arg(listPointer, int));
         // else if (ft_strchr(f->data, 'f') && (f->type = 'f'))
-        //     output = ft_itoa(va_arg(listPointer, int));
-       // else if (ft_strchr(f->data, 'c') && (f->type = 'c'))
-       //     f->output[0] = va_arg(listPointer, char);
-        //else if (ft_strchr(f->data, 's') && (f->type = 's'))
-        //    output = va_arg(listPointer, char *);
+        //     output = ft_itoa(va_arg(listPointer, int)); 
         // else if (ft_strchr(f->data, 'p') && (f->type = 'p'))
         //     output = va_arg(listPointer, void *);
         //ft_putstr(f->output);
      }
-      cnt_mem(f);
+    // printf("f->output |%s| \n", f->output);
+    (f->type == 'd') ? cnt_mem_d(f) : 0;
+    (f->type == 's' || f->type == 'c') ? cnt_mem_s(f) : 0;
      //f->result = f->output;
      //def_var(f, output);
     // treatment // output

@@ -29,7 +29,7 @@ int check_type(char c, t_data *f)
     {
         if (data_type[i] == c)
         {
-            (f) ? (f->type = c) : 0;
+            (f && f->type) ? (f->type = c) : 0;
             return (1);
         }
         i++;
@@ -50,3 +50,19 @@ int     check_data(const char *s, int *cnt_i, t_data *f)
     return (1);
 }
 
+int     validinput(const char *s)
+{
+    int i;
+
+    i = 0;
+    while (s[i])
+    {
+        if (ft_isalpha(s[i]) || ft_isdigit(s[i]) ||
+		s[i] == '#' || s[i] == '.' ||
+		s[i] == '+' || s[i] == '-' || s[i] == ' ')
+			i++;
+        else
+		return (0);
+    }
+    return (1);
+}
